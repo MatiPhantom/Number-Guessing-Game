@@ -6,7 +6,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static byte CHANCES;
+    private static byte LIMIT_CHACES;
+    private static byte CHACES;
+
+    public static final Service service=new Service();
+    
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);
         try{
@@ -18,24 +22,39 @@ public class Main {
         }
         int dificultad=scanner.nextInt();
         String dificultT="";
+        service.setDificulty((byte) dificultad);
         switch(dificultad){
             case 1:
-                CHANCES=10;
+                LIMIT_CHACES=10;
                 dificultT="Easy";
                 break;
             case 2:
-                CHANCES=5;
                 dificultT="Medium";
+                LIMIT_CHACES=5;
                 break;
             case 3:
-                CHANCES=3;
                 dificultT="Hard";
+                LIMIT_CHACES=3;
                 break;
+            default:
+                System.out.println("Invalid option");
+                System.exit(0);
         }
+        service.setRandomNumber();
         System.out.println("Great! You have selected the "+dificultT+" difficulty level.\nLet's start the game!\n");
         System.out.print("Enter your guess: ");
         byte guess=scanner.nextByte();
-        
+        switch(service.checkGuess(guess)){
+            case 1:
+                System.out.println("Incorrect! The number is greater than "+guess+".");
+            break;
+            case -1:
+                System.out.println("Incorrect! The number is less than " + guess + ".");
+            break;
+            default:
+                System.out.println("Congratulations! You guessed the correct number in 4 attempts.");
+        }
+
 
         
 
