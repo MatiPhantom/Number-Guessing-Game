@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     private static byte LIMIT_CHACES;
-    private static byte CHACES;
+    private static byte CHACES=0;
 
     public static final Service service=new Service();
     
@@ -42,18 +42,36 @@ public class Main {
         }
         service.setRandomNumber();
         System.out.println("Great! You have selected the "+dificultT+" difficulty level.\nLet's start the game!\n");
-        System.out.print("Enter your guess: ");
-        byte guess=scanner.nextByte();
-        switch(service.checkGuess(guess)){
-            case 1:
-                System.out.println("Incorrect! The number is greater than "+guess+".");
-            break;
-            case -1:
-                System.out.println("Incorrect! The number is less than " + guess + ".");
-            break;
-            default:
-                System.out.println("Congratulations! You guessed the correct number in 4 attempts.");
-        }
+        boolean x;
+        boolean y=false;
+        do{
+            System.out.print("Enter your guess: ");
+            byte guess=scanner.nextByte();
+            CHACES++;
+            x=CHACES<LIMIT_CHACES;
+            switch(service.checkGuess(guess)){
+                case 1:
+                    System.out.println("Incorrect! The number is greater than "+guess+".");
+                    y=false;
+                break;
+                case -1:
+                    System.out.println("Incorrect! The number is less than " + guess + ".");
+                    y=false;
+                break;
+                case 0:
+                break;
+                default:
+                    System.out.println("Congratulations! You guessed the correct number in "+CHACES+" attempts.");
+                    y=true;
+                break;
+            }
+
+        }while(x||y);
+
+        
+        
+
+
 
 
         
