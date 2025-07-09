@@ -42,40 +42,35 @@ public class Main {
         }
         service.setRandomNumber();
         System.out.println("Great! You have selected the "+dificultT+" difficulty level.\nLet's start the game!\n");
-        boolean x;
         boolean y=false;
-        do{
+        while (CHACES <= LIMIT_CHACES || y) {
             System.out.print("Enter your guess: ");
-            byte guess=scanner.nextByte();
+            byte guess = scanner.nextByte();
             CHACES++;
-            x=CHACES<LIMIT_CHACES;
-            switch(service.checkGuess(guess)){
+            switch (service.checkGuess(guess)) {
                 case 1:
-                    System.out.println("Incorrect! The number is greater than "+guess+".");
-                    y=false;
-                break;
+                    System.out.println("Incorrect! The number is greater than " + guess + ".");
+                    y = false;
+                    break;
                 case -1:
                     System.out.println("Incorrect! The number is less than " + guess + ".");
-                    y=false;
-                break;
+                    y = false;
+                    break;
                 case 0:
-                break;
+                    break;
                 default:
-                    System.out.println("Congratulations! You guessed the correct number in "+CHACES+" attempts.");
-                    y=true;
-                break;
+                    System.out.println("Congratulations! You guessed the correct number in " + CHACES + " attempts.");
+                    y = true;
+                    break;
             }
 
-        }while(x||y);
-
-        
-        
-
-
-
-
-        
-
+        }
+        if (CHACES > LIMIT_CHACES) {
+            System.out.println("Sorry your attempts are finished ");
+        }
+        if (!y) {
+            System.out.println("Sorry the number was " + service.getRandomNumber() + ".");
+        }
     }
 
     public static String  leerArchivo() throws IOException {
