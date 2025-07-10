@@ -43,7 +43,7 @@ public class Main {
         service.setRandomNumber();
         System.out.println("Great! You have selected the "+dificultT+" difficulty level.\nLet's start the game!\n");
         boolean y=false;
-        while (CHACES <= LIMIT_CHACES || y) {
+        while (CHACES < LIMIT_CHACES || y) {
             System.out.print("Enter your guess: ");
             byte guess = scanner.nextByte();
             CHACES++;
@@ -57,20 +57,14 @@ public class Main {
                     y = false;
                     break;
                 case 0:
-                    break;
-                default:
                     System.out.println("Congratulations! You guessed the correct number in " + CHACES + " attempts.");
                     y = true;
-                    break;
+                    System.exit(0);
             }
 
         }
-        if (CHACES > LIMIT_CHACES) {
-            System.out.println("Sorry your attempts are finished ");
-        }
-        if (!y) {
-            System.out.println("Sorry the number was " + service.getRandomNumber() + ".");
-        }
+        
+        System.out.println("Sorry the number was " + service.getRandomNumber() + ".");
     }
 
     public static String  leerArchivo() throws IOException {
